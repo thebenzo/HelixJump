@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class HelixMovement : MonoBehaviour
 {
     [SerializeField]
-    private float _rotationSpeed = 5.0f;
+    private float _rotationSpeed = 42.0f;
 
     private Vector2 _mouseDelta;
     private bool _leftMouseButtonDown;
