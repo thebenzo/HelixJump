@@ -32,4 +32,12 @@ public class Ball : MonoBehaviour
             _ballRigidbody.linearVelocity = new Vector3(velocity.x, bounceVelocity, velocity.z);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("ScoreTrigger"))
+        {
+            Debug.Log("Yay");
+        }
+    }
 }
