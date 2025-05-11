@@ -3,8 +3,8 @@ using UnityEngine;
 public class HelixPadRandomizer : MonoBehaviour
 {
     [SerializeField]
-    [Range(2, 5)]
-    private int _partsToModify = 5;
+    [Range(2, 4)]
+    private int _partsToModify = 4;
 
     void OnEnable()
     {

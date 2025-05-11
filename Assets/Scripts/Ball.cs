@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Ball : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class Ball : MonoBehaviour
     private float bounceVelocity = 3.5f;
 
     private Rigidbody _ballRigidbody;
+
+    public UnityEvent ballPassed;
 
     void Awake()
     {
@@ -33,11 +36,11 @@ public class Ball : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("ScoreTrigger"))
         {
-            Debug.Log("Yay");
+            ballPassed?.Invoke();
         }
     }
 }
