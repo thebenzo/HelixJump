@@ -506,7 +506,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: d20f6614982c38840b987d171277f9c9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -670,9 +670,33 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 452459030710592449, guid: 82faebbd9d907a9449222e16a89fd2df, type: 3}
+      propertyPath: ballPassed.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 452459030710592449, guid: 82faebbd9d907a9449222e16a89fd2df, type: 3}
+      propertyPath: ballPassed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 452459030710592449, guid: 82faebbd9d907a9449222e16a89fd2df, type: 3}
       propertyPath: ballPassed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1395580490}
+    - target: {fileID: 452459030710592449, guid: 82faebbd9d907a9449222e16a89fd2df, type: 3}
+      propertyPath: ballPassed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 452459030710592449, guid: 82faebbd9d907a9449222e16a89fd2df, type: 3}
+      propertyPath: ballPassed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateHelixPads
+      objectReference: {fileID: 0}
+    - target: {fileID: 452459030710592449, guid: 82faebbd9d907a9449222e16a89fd2df, type: 3}
+      propertyPath: ballPassed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HelixGenerator, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 452459030710592449, guid: 82faebbd9d907a9449222e16a89fd2df, type: 3}
+      propertyPath: ballPassed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3737011039599546273, guid: 82faebbd9d907a9449222e16a89fd2df, type: 3}
       propertyPath: m_Name
       value: Ball
