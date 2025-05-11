@@ -32,6 +32,7 @@ public class HelixPadRandomizer : MonoBehaviour
             {
                 // Set platform part to Danger
                 transform.GetChild(childIndex).GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(childIndex).GetChild(1).gameObject.SetActive(true);
             }
             
         }

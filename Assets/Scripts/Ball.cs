@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour
     private Rigidbody _ballRigidbody;
 
     public UnityEvent ballPassed;
+    public UnityEvent touchedDangerZone;
 
     void Awake()
     {
@@ -33,6 +34,10 @@ public class Ball : MonoBehaviour
         {
             Vector3 velocity = _ballRigidbody.linearVelocity;
             _ballRigidbody.linearVelocity = new Vector3(velocity.x, bounceVelocity, velocity.z);
+        }
+        else if (collision.gameObject.CompareTag("Danger"))
+        {
+            touchedDangerZone?.Invoke();
         }
     }
 
