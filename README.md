@@ -11,8 +11,12 @@ Welcome to Helix Jump, a fast-paced arcade-style 3D game created using Unity Eng
 * **Intuitive Controls**: Drag left or right to rotate the helix structure on mouse input.
 
 # Screenshots
+<<<<<<< HEAD
 ![Gameplay](Images/HelixJump_GameOver.gif)
 ![GameOver](Images/HelixJump_Gameplay.gif)
+=======
+
+>>>>>>> origin/main
 
 # Installation
 * Download the latest release of game from [releases](https://github.com/thebenzo/HelixJump/releases/).
