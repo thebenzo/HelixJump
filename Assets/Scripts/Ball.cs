@@ -3,16 +3,23 @@ using UnityEngine.Events;
 
 public class Ball : MonoBehaviour
 {
-    [SerializeField] private float bounceVelocity = 3.5f;
+    [SerializeField] private float _bounceVelocity = 3.5f;
 
-    private Rigidbody _ballRigidbody;
+    [Header("Audio Clips")]
+    [SerializeField] private AudioClip _bounce;
+    [SerializeField] private AudioClip _death;
 
+    [Header("Events")]
     public UnityEvent ballPassed;
     public UnityEvent touchedDangerZone;
+
+    private Rigidbody _ballRigidbody;
+    private AudioSource _audioSource;
 
     void Awake()
     {
         _ballRigidbody = gameObject.GetComponent<Rigidbody>();
+        _audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -21,11 +28,13 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform"))
         {
             Vector3 velocity = _ballRigidbody.linearVelocity;
-            _ballRigidbody.linearVelocity = new Vector3(velocity.x, bounceVelocity, velocity.z);
+            _ballRigidbody.linearVelocity = new Vector3(velocity.x, _bounceVelocity, velocity.z);
+            _audioSource.PlayOneShot(_bounce);
         }
         // Invoke event in case the pad is of Danger Type
         else if (collision.gameObject.CompareTag("Danger"))
         {
+            _audioSource.PlayOneShot(_death);
             touchedDangerZone?.Invoke();
         }
     }

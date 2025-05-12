@@ -5,14 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("UI Components")]
     [SerializeField] private TMP_Text _scoreText;
     [SerializeField] private TMP_Text _highScoreText;
     [SerializeField] private GameObject _gameoverCanvas;
 
     [SerializeField] private String _highScorePlayerPref = "HighScore";
 
+    [Header("Audio Clips")]
+    [SerializeField] private AudioClip _buttonClick;
+
+    private AudioSource _audioSource;
+
     private int _score;
     private int _highScore;
+
+    void Awake()
+    {
+        _audioSource = gameObject.GetComponent<AudioSource>();
+    }
 
     void Start()
     {
@@ -31,6 +42,7 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1.0f;
+        _audioSource.PlayOneShot(_buttonClick);
         SceneManager.LoadScene(0);
     }
 
