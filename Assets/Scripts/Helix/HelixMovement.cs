@@ -3,8 +3,7 @@ using UnityEngine.InputSystem;
 
 public class HelixMovement : MonoBehaviour
 {
-    [SerializeField]
-    private float _rotationSpeed = 42.0f;
+    [SerializeField] private float _rotationSpeed = 42.0f;
 
     private Vector2 _mouseDelta;
     private bool _leftMouseButtonDown;
@@ -20,13 +19,6 @@ public class HelixMovement : MonoBehaviour
         _leftMouseButtonDown = input.Get<float>() == 1;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         // Apply Y rotation to the helix only if player is holding left mouse button

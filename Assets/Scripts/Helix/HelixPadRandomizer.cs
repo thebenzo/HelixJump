@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class HelixPadRandomizer : MonoBehaviour
 {
-    [SerializeField]
-    [Range(2, 4)]
-    private int _partsToModify = 4;
+    [SerializeField][Range(2, 4)] private int _partsToModify = 4;
 
     void OnEnable()
     {
@@ -34,19 +32,6 @@ public class HelixPadRandomizer : MonoBehaviour
                 transform.GetChild(childIndex).GetChild(0).gameObject.SetActive(false);
                 transform.GetChild(childIndex).GetChild(1).gameObject.SetActive(true);
             }
-            
         }
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

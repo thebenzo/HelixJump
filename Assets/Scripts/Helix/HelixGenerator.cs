@@ -1,54 +1,65 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HelixGenerator : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _helixPad;
+    [SerializeField] private GameObject _helixPad;
+    [SerializeField] private int _initialPadCount = 6;
+    [SerializeField] private float _yOffset = -0.3f;
 
-    [SerializeField]
-    private int _initialPadCount = 6;
-
-    [SerializeField]
-    private float _yOffset = -0.3f;
-
-    private float _yPos = 1.15f;
-
-    private int it = 0;
-
+    // Object pool of instantiated helix pads (alternatively, we can use dequeue)
     private List<GameObject> _helixPads = new List<GameObject>();
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private float _yStartPos = 1.15f;
+    private float _yCurrentPos;
+    private int _padIndex = 0;
+
+    private Transform _helixCylinder;
+    private Transform _padParent;
+
+    void Awake()
+    {
+        _helixCylinder = transform.GetChild(0);
+        _padParent = transform.GetChild(1);
+        _yCurrentPos = _yStartPos;
+    }
+
     void Start()
     {
         for (int i = 0; i < _initialPadCount; i++)
         {
-            _yPos += _yOffset;
-            Vector3 spawnPos = new Vector3(0, _yPos, 0);
-            GameObject pad = GameObject.Instantiate(_helixPad, transform.GetChild(1));
+            // Spawn pad and add it to pool
+            _yCurrentPos += _yOffset;
+            Vector3 spawnPos = new Vector3(0, _yCurrentPos, 0);
+            GameObject pad = Instantiate(_helixPad, _padParent);
             pad.transform.localPosition = spawnPos;
+
+            // Ensure the first pad has no danger tile at ball spawn position;
+            if (i == 0)
+            {
+                pad.transform.GetChild(3).GetChild(1).gameObject.SetActive(false);
+                pad.transform.GetChild(4).GetChild(1).gameObject.SetActive(false);
+            }
+
             _helixPads.Add(pad);
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void UpdateHelixPads()
     {
-        GameObject currPad = _helixPads[it++ % _initialPadCount];
+        // Iterate over pads without going out of bounds of the list
+        GameObject currPad = _helixPads[_padIndex++ % _initialPadCount];
+
         currPad.SetActive(false);
 
-        _yPos += _yOffset;
-        Vector3 newPos = new Vector3(0, _yPos, 0);
-        currPad.transform.localPosition = newPos;
+        // Move passed helix pad to bottom
+        _yCurrentPos += _yOffset;
+        currPad.transform.localPosition = new Vector3(0, _yCurrentPos, 0);
 
-        Transform helixCylinder = transform.GetChild(0);
-        helixCylinder.localPosition = new Vector3(helixCylinder.localPosition.x, helixCylinder.localPosition.y - 0.3f, helixCylinder.localPosition.z);
+        // Shift Helix Cylinder Mesh down by an offset
+        _helixCylinder.localPosition += new Vector3(0, _yOffset, 0);
 
         currPad.SetActive(true);
     }

@@ -5,31 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private TMP_Text _scoreText;
+    [SerializeField] private TMP_Text _scoreText;
+    [SerializeField] private TMP_Text _highScoreText;
+    [SerializeField] private GameObject _gameoverCanvas;
 
-    [SerializeField]
-    private TMP_Text _highScoreText;
-
-    [SerializeField]
-    private GameObject _gameoverCanvas;
+    [SerializeField] private String _highScorePlayerPref = "HighScore";
 
     private int _score;
     private int _highScore;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _score = 0;
-        _highScore = PlayerPrefs.GetInt("HighScore", 0);
-        String highScoreText = "Previous Best: " + _highScore.ToString();
-        _highScoreText.text = highScoreText;
-    }
+        _highScore = PlayerPrefs.GetInt(_highScorePlayerPref, 0);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        UpdateHighScoreUI();
     }
 
     public void GameOver()
@@ -47,21 +37,28 @@ public class GameManager : MonoBehaviour
     public void UpdateScore()
     {
         _score += 10;
-        String scoreText = "Score: " + _score.ToString();
-        _scoreText.text = scoreText;
+        UpdateScoreUI();
 
         if (_score > _highScore)
         {
-            UpdateHighScore();
+            SetHighScore();
+            UpdateHighScoreUI();
         }
     }
 
-    public void UpdateHighScore()
+    private void UpdateScoreUI()
+    {
+        _scoreText.text = $"Score: {_score}";
+    }
+
+    private void UpdateHighScoreUI()
+    {
+        _highScoreText.text = $"Previous Best: {_highScore}";
+    }
+
+    private void SetHighScore()
     {
         _highScore = _score;
-        PlayerPrefs.SetInt("HighScore", _highScore);
-
-        String highScoreText = "Previous Best: " + _highScore.ToString();
-        _highScoreText.text = highScoreText;
+        PlayerPrefs.SetInt(_highScorePlayerPref, _highScore);
     }
 }
